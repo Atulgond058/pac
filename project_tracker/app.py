@@ -2,7 +2,10 @@ import sqlite3
 from functools import wraps
 from flask import Flask, request, jsonify, session, g, send_from_directory
 
-app = Flask(__name__, static_folder="static", static_url_path="/static")
+app = Flask(__name__, static_folder=".", static_url_path="")
+@app.get("/")
+def home():
+    return send_from_directory(".", "index.html")
 app.secret_key = "change-this-secret"
 DB = "projects.db"
 TEACHER = ("teacher", "admin123")  # demo credentials
